@@ -1,22 +1,25 @@
 package com.gjiazhe.layoutswitch;
 
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
+
+import static com.gjiazhe.layoutswitch.MyGridLayoutManager.SPAN_COUNT_DEFAULT;
 
 /**
  * Created by gjz on 16/01/2017.
  */
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder>{
-    public static final int SPAN_COUNT_ONE = 1;
-    public static final int SPAN_COUNT_THREE = 3;
+public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
+
 
     private static final int VIEW_TYPE_SMALL = 1;
     private static final int VIEW_TYPE_BIG = 2;
@@ -32,10 +35,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     @Override
     public int getItemViewType(int position) {
         int spanCount = mLayoutManager.getSpanCount();
-        if (spanCount == SPAN_COUNT_ONE) {
-            return VIEW_TYPE_BIG;
-        } else {
+        if (spanCount == SPAN_COUNT_DEFAULT) {
             return VIEW_TYPE_SMALL;
+        } else {
+            return VIEW_TYPE_BIG;
         }
     }
 
@@ -53,32 +56,30 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         Item item = mItems.get(position % 4);
-        holder.title.setText(item.getTitle());
         holder.iv.setImageResource(item.getImgResId());
-        if (getItemViewType(position) == VIEW_TYPE_BIG) {
-            holder.info.setText(item.getLikes() + " likes  ·  " + item.getComments() + " comments");
+        ViewGroup.LayoutParams ivLp = holder.iv.getLayoutParams();
+        if (position == 0 && getItemViewType(position) == VIEW_TYPE_BIG) {//第一个
+            ivLp.height = (int) DensityUtil.dp2px(holder.iv.getContext(), 240);
+        } else {
+            ivLp.height = (int) DensityUtil.dp2px(holder.iv.getContext(), 120);
         }
     }
 
     @Override
     public int getItemCount() {
-        return 30;
+        return 9;
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
         ImageView iv;
-        TextView title;
-        TextView info;
+
 
         ItemViewHolder(View itemView, int viewType) {
             super(itemView);
             if (viewType == VIEW_TYPE_BIG) {
                 iv = (ImageView) itemView.findViewById(R.id.image_big);
-                title = (TextView) itemView.findViewById(R.id.title_big);
-                info = (TextView) itemView.findViewById(R.id.tv_info);
             } else {
                 iv = (ImageView) itemView.findViewById(R.id.image_small);
-                title = (TextView) itemView.findViewById(R.id.title_small);
             }
         }
     }

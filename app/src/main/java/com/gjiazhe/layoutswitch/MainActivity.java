@@ -1,24 +1,27 @@
 package com.gjiazhe.layoutswitch;
 
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.gjiazhe.layoutswitch.ItemAdapter.SPAN_COUNT_THREE;
-import static com.gjiazhe.layoutswitch.ItemAdapter.SPAN_COUNT_ONE;
+import static com.gjiazhe.layoutswitch.MyGridLayoutManager.SPAN_COUNT_DEFAULT;
+import static com.gjiazhe.layoutswitch.MyGridLayoutManager.SPAN_COUNT_SCALE;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ItemAdapter itemAdapter;
-    private GridLayoutManager gridLayoutManager;
+    private MyGridLayoutManager gridLayoutManager;
     private List<Item> items;
 
     @Override
@@ -26,11 +29,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+//        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
         initItemsData();
 
-        gridLayoutManager = new GridLayoutManager(this, SPAN_COUNT_ONE);
+        gridLayoutManager = new MyGridLayoutManager(this, SPAN_COUNT_DEFAULT);
         itemAdapter = new ItemAdapter(items, gridLayoutManager);
         recyclerView = (RecyclerView) findViewById(R.id.rv);
         recyclerView.setAdapter(itemAdapter);
@@ -62,16 +65,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void switchLayout() {
-        if (gridLayoutManager.getSpanCount() == SPAN_COUNT_ONE) {
-            gridLayoutManager.setSpanCount(SPAN_COUNT_THREE);
+        if (gridLayoutManager.getSpanCount() == SPAN_COUNT_DEFAULT) {
+            gridLayoutManager.setSpanCount(SPAN_COUNT_SCALE);
         } else {
-            gridLayoutManager.setSpanCount(SPAN_COUNT_ONE);
+            gridLayoutManager.setSpanCount(SPAN_COUNT_DEFAULT);
         }
         itemAdapter.notifyItemRangeChanged(0, itemAdapter.getItemCount());
     }
 
     private void switchIcon(MenuItem item) {
-        if (gridLayoutManager.getSpanCount() == SPAN_COUNT_THREE) {
+        if (gridLayoutManager.getSpanCount() == SPAN_COUNT_SCALE) {
             item.setIcon(getResources().getDrawable(R.drawable.ic_span_3));
         } else {
             item.setIcon(getResources().getDrawable(R.drawable.ic_span_1));
