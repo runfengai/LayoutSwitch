@@ -1,6 +1,8 @@
 package com.gjiazhe.layoutswitch;
 
 
+import android.graphics.Point;
+import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,12 +69,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         Item item = mItems.get(position);
         holder.iv.setImageResource(item.getImgResId());
-        ViewGroup.LayoutParams ivLp = holder.iv.getLayoutParams();
+        ViewGroup.LayoutParams ivLp = holder.root.getLayoutParams();
         if (position == 0 && getItemViewType(position) == VIEW_TYPE_BIG) {//第一个
             ivLp.height = (int) DensityUtil.dp2px(holder.iv.getContext(), 240);
+//            ivLp.width = (int) DensityUtil.dp2px(holder.iv.getContext(), 240);
         } else {
             ivLp.height = (int) DensityUtil.dp2px(holder.iv.getContext(), 120);
+//            ivLp.width = (int) DensityUtil.dp2px(holder.iv.getContext(), 120);
         }
+    }
+
+    public View getView(int position) {
+        return mLayoutManager.findViewByPosition(position);
     }
 
     @Override
@@ -91,11 +99,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     }
 
+    public void notifyDataSet(List<Item> items, int i, int position) {
+        this.mItems.clear();
+        this.mItems.addAll(items);
+        notifyDataSetChanged();
+    }
+
     class ItemViewHolder extends RecyclerView.ViewHolder {
         ImageView iv;
+        View root;
 
         ItemViewHolder(View itemView, int viewType) {
             super(itemView);
+            root = itemView;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -4,12 +4,13 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="#FFFFFF"
+    android:id="@+id/lin"
     android:layout_margin="4dp">
 
     <ImageView
         android:id="@+id/image_big"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/img1" />
 </LinearLayout>
