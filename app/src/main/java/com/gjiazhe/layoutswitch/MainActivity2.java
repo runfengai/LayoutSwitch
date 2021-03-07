@@ -25,9 +25,10 @@ public class MainActivity2 extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                gridAdapter.notifyDataSetChanged();
+                initItemsData2();
+                gridAdapter.notifyDataSetChanged(items);
             }
-        }, 300);
+        }, 3000);
     }
 
     private List<Item> items;
@@ -41,6 +42,11 @@ public class MainActivity2 extends AppCompatActivity {
         items.add(new Item(R.drawable.img1, "Image 5", 20, 33));
         items.add(new Item(R.drawable.img2, "Image 6", 10, 54));
         items.add(new Item(R.drawable.img3, "Image 7", 27, 20));
+        items.add(new Item(R.drawable.img4, "Image 8", 45, 67));
+    }
+
+    private void initItemsData2() {
+        items = new ArrayList<>();
         items.add(new Item(R.drawable.img4, "Image 8", 45, 67));
     }
 }

@@ -151,12 +151,6 @@ public class ScalableGridView extends CommonGridView {
         logicIndexes.add(i);
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        Log.e(TAG, "=========onMeasure=========");
-    }
-
     /**
      * 开始放大某个指定view
      *
@@ -217,6 +211,12 @@ public class ScalableGridView extends CommonGridView {
     private void apply(ConstraintSet set) {
         TransitionManager.beginDelayedTransition(this, autoTransition);
         set.applyTo(this);
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        addAllView();
     }
 
     @Override

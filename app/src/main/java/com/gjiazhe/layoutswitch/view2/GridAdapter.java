@@ -25,8 +25,6 @@ public abstract class GridAdapter implements IAdapter {
 
     public abstract View onCreateView(int position, ViewGroup viewGroup);
 
-    public abstract void onBindView(View view);
-
     public void notifyDataSetChanged() {
         mDataSetObservable.notifyChanged();
     }

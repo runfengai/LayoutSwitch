@@ -67,6 +67,10 @@ public abstract class CommonGridView extends ConstraintLayout {
         return cacheView;
     }
 
+    public void clearCache() {
+        cacheBin.clear();
+    }
+
     MyObserver mDataSetObserver;
 
     @Override
@@ -94,6 +98,7 @@ public abstract class CommonGridView extends ConstraintLayout {
         post(new Runnable() {
             @Override
             public void run() {
+                clearCache();
                 addAllView();
             }
         });

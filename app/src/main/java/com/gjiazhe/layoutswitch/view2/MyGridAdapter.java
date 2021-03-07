@@ -18,6 +18,12 @@ public class MyGridAdapter extends GridAdapter {
         this.list = list;
     }
 
+    public void notifyDataSetChanged(List<Item> list) {
+        this.list.clear();
+        this.list.addAll(list);
+        notifyDataSetChanged();
+    }
+
     @Override
     protected int getItemCount() {
         return 9;
@@ -43,8 +49,4 @@ public class MyGridAdapter extends GridAdapter {
         return view;
     }
 
-    @Override
-    public void onBindView(View view) {
-
-    }
 }
