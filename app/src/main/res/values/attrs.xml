@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ScalableGridView">
+        <attr name="normalSpanCount" format="integer" />
+        <attr name="highlightSpanCount" format="integer" />
+    </declare-styleable>
+</resources>

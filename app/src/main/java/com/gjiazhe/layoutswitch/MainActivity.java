@@ -113,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             //结束后(TODO 加了这句，第五个之后的都有问题。)
-                            itemAdapter.notifyDataSet(items,0,position);
+//                            itemAdapter.notifyDataSet(items,0,position);
+
 //                            view1.setPivotX(view1.getWidth() / 2);
 //                            view1.setPivotY(view1.getHeight() / 2);
 //                            view2.setPivotX(view2.getWidth() / 2);
@@ -136,8 +137,10 @@ public class MainActivity extends AppCompatActivity {
                     //点击后，layoutManager处理
                     gridLayoutManager.setHighLightPosition(position);
                     //改变数据源
-                    changeDataRange(position);
-                    switchLayout();
+//                    changeDataRange(position);
+                    gridLayoutManager.switchSpanCount();
+
+//                    notifyAdapter();
                 }
 
             }
@@ -187,17 +190,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_switch_layout) {
-            switchLayout();
+            gridLayoutManager.switchSpanCount();
+            notifyAdapter();
             switchIcon(item);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void switchLayout() {
-        gridLayoutManager.switchSpanCount();
-        notifyAdapter();
-    }
 
     private void notifyAdapter() {
         itemAdapter.notifyItemRange(items);
