@@ -3,9 +3,9 @@ package com.gjiazhe.layoutswitch.view2;
 import android.content.Context;
 import android.content.res.TypedArray;
 
-import android.transition.AutoTransition;
-import android.transition.Transition;
-import android.transition.TransitionManager;
+import androidx.transition.AutoTransition;
+import androidx.transition.Transition;
+import androidx.transition.TransitionManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;

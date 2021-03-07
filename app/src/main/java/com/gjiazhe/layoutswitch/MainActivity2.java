@@ -25,8 +25,8 @@ public class MainActivity2 extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                initItemsData2();
-                gridAdapter.notifyDataSetChanged(items);
+//                initItemsData2();
+//                gridAdapter.notifyDataSetChanged(items);
             }
         }, 3000);
     }
