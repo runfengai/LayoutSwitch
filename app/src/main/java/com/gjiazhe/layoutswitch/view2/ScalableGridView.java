@@ -16,7 +16,7 @@ import com.gjiazhe.layoutswitch.R;
 import com.gjiazhe.layoutswitch.view2.animation.AbsConstraintStrategy;
 import com.gjiazhe.layoutswitch.view2.animation.NormalConstraintStrategy;
 import com.gjiazhe.layoutswitch.view2.animation.ScaleConstraintStrategy;
-import com.gjiazhe.layoutswitch.view2.animation.ScaleSwitchConstraintStrategy;
+
 
 import java.util.LinkedList;
 
@@ -54,6 +54,8 @@ public class ScalableGridView extends CommonGridView {
      * 放大状态下逻辑上的索引
      */
     private LinkedList<Integer> logicIndexes = new LinkedList<>();
+
+
 
     /**
      * 三种状态：
